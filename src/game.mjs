@@ -1,3 +1,27 @@
+// GLOBALS ====================================================
+const gap = 2; // CONTROL FOR OMOK GRID GAPS
+const cellWidth = 40; // CONTROL FOR OMOK GRID SQUARE SIZE
+
+let playerTurn = 1;
+let winner = '';
+
+// GLOBALS TO TARGET HTML CLASSES ==================================
+const bgm = new Audio('./public/audio/bgm.mp3');
+const gameUI = document.querySelector('.game-ui-left');
+const gameAlert = document.querySelector('.game-message');
+const startBtn = document.querySelector('.start-button');
+const giveUpBtn = document.querySelector('.giveup-button');
+const exitBtn = document.querySelector('.exit-button');
+
+// RENDER 2D ARRAY FOR OMOK BOARD =================================
+let omokGrid = [];
+const omokGridWidth = 19;
+const omokGridHeight = 19;
+for (let i = 0; i < omokGridHeight; i++) {
+  const row = new Array(omokGridWidth);
+  row.fill(0);
+  omokGrid.push(row);
+}
 // HELPER FUNCTION: GAME GRID SQUARE CLICK==========================================
 //=========================================================================
 const clickedGameSquare = (row, column) => {
