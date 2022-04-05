@@ -1,4 +1,4 @@
-// HELPER FUNCTION: GAME GRID SQUARE CLICK=======================================
+// HELPER FUNCTION: GAME GRID SQUARE CLICK==========================================
 //=========================================================================
 const clickedGameSquare = (row, column) => {
   const clickEffect = new Audio('./public/audio/click.mp3');
@@ -218,3 +218,73 @@ const checkForWin = (omokGrid, row, column) => {
   checkUpRight(omokGrid, Number(row), Number(column));
   checkDraw(omokGrid);
 };
+
+// HELPER FUNCTION: START BTN CLICK================================================
+//=========================================================================
+const startBtnClick = () => {
+  const startEffect = new Audio('./public/audio/button.wav');
+  startEffect.play();
+  bgm.play();
+
+  omokGrid = [];
+  for (let i = 0; i < omokGridHeight; i++) {
+    const row = new Array(omokGridWidth);
+    row.fill(0);
+    omokGrid.push(row);
+  }
+  winner = '';
+
+  renderGameBoard();
+  renderGamePieces();
+
+  document.body.style.backgroundImage = 'url("./public/images/background.jpg")';
+  gameAlert.style.backgroundImage = 'none';
+  gameAlert.style.zIndex = '-1';
+  startBtn.style.visibility = 'hidden';
+
+  giveUpBtn.style.visibility = 'visible';
+  exitBtn.style.visibility = 'visible';
+};
+
+// HELPER FUNCTION: GIVEUP BTN CLICK================================================
+//==========================================================================
+const giveupBtnClick = () => {
+  const giveupEffect = new Audio('./public/audio/button.wav');
+  giveupEffect.play();
+
+  gameAlert.style.zIndex = '1';
+  setTimeout(() => {
+    const loseEffect = new Audio('./public/audio/lose.wav');
+    loseEffect.play();
+    gameAlert.style.backgroundImage = "url('./public/images/lose.png')";
+
+    startBtn.style.visibility = 'visible';
+    giveUpBtn.style.visibility = 'hidden';
+    exitBtn.style.visibility = 'hidden';
+    document.body.removeAttribute('style');
+    bgm.pause();
+  }, 500);
+};
+
+// HELPER FUNCTION: EXIT BTN CLICK===================================================
+//==========================================================================
+const exitBtnClick = () => {
+  const endEffect = new Audio('./public/audio/button.wav');
+  endEffect.play();
+
+  setTimeout(() => {
+    const leaveEffect = new Audio('./public/audio/exit.wav');
+    leaveEffect.play();
+  }, 450);
+
+  setTimeout(() => {
+    window.location.reload();
+  }, 750);
+};
+
+startBtn.addEventListener('click', startBtnClick);
+exitBtn.addEventListener('click', exitBtnClick);
+giveUpBtn.addEventListener('click', giveupBtnClick);
+
+giveUpBtn.style.visibility = 'hidden';
+exitBtn.style.visibility = 'hidden';
