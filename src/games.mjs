@@ -22,6 +22,7 @@ for (let i = 0; i < omokGridHeight; i++) {
   row.fill(0);
   omokGrid.push(row);
 }
+
 // HELPER FUNCTION: GAME GRID SQUARE CLICK==========================================
 //=========================================================================
 const clickedGameSquare = (row, column) => {
@@ -241,6 +242,26 @@ const checkForWin = (omokGrid, row, column) => {
   checkUpLeft(omokGrid, Number(row), Number(column));
   checkUpRight(omokGrid, Number(row), Number(column));
   checkDraw(omokGrid);
+};
+
+// HELPER FUNCTION: GAME WIN ===================================================
+//=========================================================================
+const win = () => {
+  if (winner === 1 || winner === 2) {
+    const winEffect = new Audio('./public/audio/win.wav');
+    winEffect.play();
+    gameAlert.style.zIndex = '1';
+
+    setTimeout(() => {
+      gameAlert.style.backgroundImage = "url('./public/images/win.png')";
+
+      startBtn.style.visibility = 'visible';
+      giveUpBtn.style.visibility = 'hidden';
+      exitBtn.style.visibility = 'hidden';
+      document.body.removeAttribute('style');
+      bgm.pause();
+    }, 1200);
+  }
 };
 
 // HELPER FUNCTION: START BTN CLICK================================================
