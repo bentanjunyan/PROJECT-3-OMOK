@@ -1,5 +1,5 @@
 // import db from './models/index.mjs';
-// import initUserController from './controllers/users.mjs';
+// import initUserController from './controllers/userController.mjs';
 
 // export default function bindRoutes(app) {
 //   const UserController = initUserController(db);
